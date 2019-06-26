@@ -31,7 +31,24 @@ var quizQuestions = [
           isCorrect: false
         }
       ]
-    }
+    },
+    {
+       question: "What is 5 + 1?",
+       answers: [
+         {
+           content: "6",
+           isCorrect: true
+         },
+         {
+           content: "3",
+           isCorrect: false
+         },
+         {
+           content: "1",
+           isCorrect: false
+         }
+       ]
+     }
 ];
 
 export default quizQuestions;

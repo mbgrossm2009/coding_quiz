@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
-function AnswerOption(props) {
+function AnswerOption(props, index = 0) {
     return (
       <li className="answerOption">
        <input
@@ -13,9 +13,13 @@ function AnswerOption(props) {
          value={props.answerContent}
          disabled={props.answer}
          onChange={props.onAnswerSelected}
+         answer= {props.answer}
+         index = {index + 1}
+
        />
        <label className="radioCustomLabel" htmlFor={props.answerType}>
          {props.answerContent}
+
        </label>
      </li>
    );
