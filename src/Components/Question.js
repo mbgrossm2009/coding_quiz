@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 function Question(props){
   return(
-    <h2 className = "question">
+    <h2 className = "question text-center">
       {props.content}
       </h2>
   )

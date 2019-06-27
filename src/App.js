@@ -3,10 +3,12 @@ import Question from "./Components/Question";
 import Quiz from "./Components/Quiz";
 import AnswerOption from "./Components/AnswerOption";
 import quizQuestions from "./Api/quizQuestions";
-
+import Correctness from "./Components/QuestionCorrectness";
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
+    this.addCorrectAnswer = this.addCorrectAnswer.bind(this);
 
     this.state = {
       counter: 0,
@@ -16,7 +18,8 @@ class App extends React.Component {
       answer: "",
       answersCount: {},
       rightAnswers: 0,
-      wrongAnswers: 0
+      wrongAnswers: 0,
+      correct: false
     };
   }
 
@@ -26,40 +29,44 @@ class App extends React.Component {
       question: quizQuestions[this.state.counter].question,
       answerOptions: answerOptions[this.state.counter]
     });
+    console.log(this.state.rightAnswers);
   }
 
   handleAnswerSelected(event) {
-    this.setUserAnswer(event.currentTarget.value);
     for (var i = 0; i < quizQuestions.length; i++) {
-      // loop thru quizQuestions
       function isCorrect(guess) {
+        var theCorrectAnswer = guess.answers[i].isTheAnswer === true;
+        var theCorrectAnswerContent = guess.answers[i].content;
         if (
-          guess.answers[i].isCorrect === true &&
-          guess.answers[i].content === event.currentTarget.value
+          theCorrectAnswer &&
+          theCorrectAnswerContent === event.currentTarget.value
         ) {
-          this.setState({
-            rightAnswers: this.state.rightAnswers + 1
-          });
+          console.log("Correct");
+          this.addCorrectAnswer()
+        } else if (
+          !theCorrectAnswer &&
+          theCorrectAnswerContent === event.currentTarget.value
+        ) {
+          console.log("Incorrect");
         }
       }
-      console.log(quizQuestions.find(isCorrect));
+
+      quizQuestions.find(isCorrect);
     }
   }
 
-  //
   // if (this.state.questionId < quizQuestions.length) {
   //   setTimeout(() => this.setNextQuestion(), 300);
   // }
+  // }
 
-  setUserAnswer(answer) {
-    this.setState((state, props) => ({
-      answersCount: {
-        ...state.answersCount,
-        [answer]: (state.answersCount[answer] || 0) + 1
-      },
-      answer: answer
-    }));
+  addCorrectAnswer(rightAnswers){
+    this.setState({
+      rightAnswers: this.state.rightAnswers + 1
+    })
+
   }
+
   setNextQuestion() {
     const counter = this.state.counter + 1;
     const questionId = this.state.questionId + 1;
@@ -73,8 +80,6 @@ class App extends React.Component {
   }
 
   render() {
-    this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
-
     return (
       <div>
         <Quiz

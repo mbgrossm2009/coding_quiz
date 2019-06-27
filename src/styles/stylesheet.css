@@ -1,0 +1,10 @@
+@import url("https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css");
+
+
+ul{
+  list-style-type: none;
+}
+
+.radioCustomButton{
+      margin-right: 10px;
+}

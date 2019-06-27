@@ -1,17 +1,17 @@
 var quizQuestions = [
   {
-    question: "What is 2+2?",
+    question: "Which is True regarding the differences between =, ==, and ===?",
     answers: [
       {
-        content: "4",
-        isCorrect: true
+        content: "= defines a variable, == compares two variables and checks for simple equality, === checks strict equality ",
+        isTheAnswer: true
       },
       {
-        content: "3",
+        content: "There is no difference ",
         isCorrect: false
       },
       {
-        content: "1",
+        content: "42 ",
         isCorrect: false
       }
     ]
