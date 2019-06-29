@@ -1,4 +1,4 @@
-import React from "react";
+import React  from 'react';
 import Question from "./Components/Question";
 import Quiz from "./Components/Quiz";
 import AnswerOption from "./Components/AnswerOption";
@@ -8,7 +8,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
-    this.addCorrectAnswer = this.addCorrectAnswer.bind(this);
 
     this.state = {
       counter: 0,
@@ -29,11 +28,14 @@ class App extends React.Component {
       question: quizQuestions[this.state.counter].question,
       answerOptions: answerOptions[this.state.counter]
     });
-    console.log(this.state.rightAnswers);
   }
 
   handleAnswerSelected(event) {
+    let theRightAnswers = this.state.rightAnswers
+
     for (var i = 0; i < quizQuestions.length; i++) {
+      this.addCorrectAnswer = this.addCorrectAnswer.bind(this);
+
       function isCorrect(guess) {
         var theCorrectAnswer = guess.answers[i].isTheAnswer === true;
         var theCorrectAnswerContent = guess.answers[i].content;
@@ -42,7 +44,7 @@ class App extends React.Component {
           theCorrectAnswerContent === event.currentTarget.value
         ) {
           console.log("Correct");
-          this.addCorrectAnswer()
+          console.log(theRightAnswers += 1)
         } else if (
           !theCorrectAnswer &&
           theCorrectAnswerContent === event.currentTarget.value
@@ -53,12 +55,12 @@ class App extends React.Component {
 
       quizQuestions.find(isCorrect);
     }
-  }
 
-  // if (this.state.questionId < quizQuestions.length) {
-  //   setTimeout(() => this.setNextQuestion(), 300);
-  // }
-  // }
+
+  if (this.state.questionId < quizQuestions.length) {
+    setTimeout(() => this.setNextQuestion(), 300);
+  }
+  }
 
   addCorrectAnswer(rightAnswers){
     this.setState({

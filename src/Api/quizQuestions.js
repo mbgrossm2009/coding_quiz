@@ -20,7 +20,7 @@ var quizQuestions = [
       answers: [
         {
           content: "28",
-          isCorrect: true
+          isTheAnswer: true
         },
         {
           content: "3",
@@ -37,7 +37,7 @@ var quizQuestions = [
        answers: [
          {
            content: "6",
-           isCorrect: true
+           isTheAnswer: true
          },
          {
            content: "3",
