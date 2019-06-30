@@ -31,55 +31,58 @@ class App extends React.Component {
   }
 
   handleAnswerSelected(event) {
-    let theRightAnswers = this.state.rightAnswers
 
     for (var i = 0; i < quizQuestions.length; i++) {
-      this.addCorrectAnswer = this.addCorrectAnswer.bind(this);
+      const isCorrect = (guess) => {
 
-      function isCorrect(guess) {
         var theCorrectAnswer = guess.answers[i].isTheAnswer === true;
         var theCorrectAnswerContent = guess.answers[i].content;
-        if (
-          theCorrectAnswer &&
-          theCorrectAnswerContent === event.currentTarget.value
-        ) {
+          if (theCorrectAnswer && theCorrectAnswerContent === event.currentTarget.value) {
           console.log("Correct");
-          console.log(theRightAnswers += 1)
-        } else if (
-          !theCorrectAnswer &&
-          theCorrectAnswerContent === event.currentTarget.value
-        ) {
-          console.log("Incorrect");
-        }
-      }
+          this.setState({
+          rightAnswers: this.state.rightAnswers + 1
+          })
+          console.log(this.state.rightAnswers)
 
+        } else if (!theCorrectAnswer && theCorrectAnswerContent === event.currentTarget.value) {
+          console.log("Incorrect");
+          this.setState({
+          wrongAnswers: this.state.wrongAnswers + 1
+          })
+          console.log(this.state.wrongAnswers)
+
+
+        }
+
+      }
       quizQuestions.find(isCorrect);
+
     }
 
 
-  if (this.state.questionId < quizQuestions.length) {
-    setTimeout(() => this.setNextQuestion(), 300);
-  }
-  }
+  // if (this.state.questionId < quizQuestions.length) {
+  //   setTimeout(() => this.setNextQuestion(), 300);
+  // }
 
-  addCorrectAnswer(rightAnswers){
-    this.setState({
-      rightAnswers: this.state.rightAnswers + 1
-    })
+  // addCorrectAnswer(rightAnswers){
+  //   this.setState({
+  //     rightAnswers: this.state.rightAnswers + 1
+  //   })
+  //
+  // }
 
-  }
-
-  setNextQuestion() {
-    const counter = this.state.counter + 1;
-    const questionId = this.state.questionId + 1;
-    this.setState({
-      counter: counter,
-      questionId: questionId,
-      question: quizQuestions[counter].question,
-      answerOptions: quizQuestions[counter].answers,
-      answer: ""
-    });
-  }
+  // setNextQuestion() {
+  //   const counter = this.state.counter + 1;
+  //   const questionId = this.state.questionId + 1;
+  //   this.setState({
+  //     counter: counter,
+  //     questionId: questionId,
+  //     question: quizQuestions[counter].question,
+  //     answerOptions: quizQuestions[counter].answers,
+  //     answer: ""
+  //   });
+  // }
+}
 
   render() {
     return (

@@ -18,7 +18,6 @@ function Quiz(props) {
     );
   }
   return (
-
     <div className="container w-50 p-3  quiz border border-primary">
       <QuestionCount counter={props.questionId} total={props.questionTotal} />
       <Question content={props.question} />
